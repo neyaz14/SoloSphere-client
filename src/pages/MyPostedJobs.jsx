@@ -1,6 +1,19 @@
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../providers/AuthProvider'
+import axios from 'axios';
 
 const MyPostedJobs = () => {
+  const {user } = useContext(AuthContext);
+  const [myjobs ,setmyjobs]= useState([]);
+  useEffect(()=>{
+    // const {data}
+    fetchmyJobs()
+  },[user])
+  const fetchmyJobs= async ()=>{
+    const {data }= await axios.get(`${import.meta.env.VITE_API_URL}/jobs/${user?.email}`);
+    setmyjobs(data)
+  }
   return (
     <section className='container px-4 mx-auto pt-12'>
       <div className='flex items-center gap-x-3'>
@@ -16,6 +29,7 @@ const MyPostedJobs = () => {
           <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
             <div className='overflow-hidden border border-gray-200  md:rounded-lg'>
               <table className='min-w-full divide-y divide-gray-200'>
+
                 <thead className='bg-gray-50'>
                   <tr>
                     <th
@@ -49,6 +63,7 @@ const MyPostedJobs = () => {
                     >
                       Category
                     </th>
+
                     <th
                       scope='col'
                       className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
@@ -59,8 +74,10 @@ const MyPostedJobs = () => {
                     <th className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'>
                       Edit
                     </th>
+
                   </tr>
                 </thead>
+
                 <tbody className='bg-white divide-y divide-gray-200 '>
                   <tr>
                     <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
