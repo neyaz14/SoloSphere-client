@@ -58,15 +58,10 @@ const AllJobs = () => {
           </div>
           <button className='btn'>Reset</button>
         </div>
+
+
         <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
+          {jobs.map(job=> <JobCard job={job} key={job._id}></JobCard>)}
         </div>
       </div>
     </div>
